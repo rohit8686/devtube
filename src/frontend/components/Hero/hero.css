@@ -1,0 +1,27 @@
+.hero-img {
+    width: 100%;
+    object-fit: cover;
+}
+.relative {
+    position: relative;
+}
+.hero-text {
+    position: absolute;
+    font-size: 1.5rem;
+    top: 0;
+    bottom: 0;
+    left: 2%;
+    color: var(--white-color);
+    width: 60%;
+}
+
+@media screen and (max-width:600px) {
+    .hero-text {
+        font-size: 1rem;
+    }
+}
+@media screen and (max-width:400px) {
+    .hero-text {
+        font-size: 0.8rem;
+    }
+}
