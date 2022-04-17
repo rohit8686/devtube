@@ -26,6 +26,7 @@ export const Trending = () => {
               </div>
             );
           }
+          return "";
         })}
       </div>
     </>
