@@ -1,0 +1,20 @@
+.active-link,.sidebar-link:hover{
+    background-color: var(--info-color);
+    color:var(--white-color);
+    border:none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+.sidebar-link{
+    padding-top: 0.7rem;
+    padding-bottom:0.7rem;
+}
+.mt-1{
+    margin-top:1rem;
+}
+.px-1{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
