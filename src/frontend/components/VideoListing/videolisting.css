@@ -1,0 +1,11 @@
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+    top:-65%;
+    right:0;
+}
+.pb-4{
+    padding-bottom: 4rem;
+}

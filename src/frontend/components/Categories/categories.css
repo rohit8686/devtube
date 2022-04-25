@@ -1,0 +1,11 @@
+.category-btn{
+    border:none;
+    font-size: 1rem;
+    padding:0.5rem 1.5rem;
+    cursor: pointer;
+    border-radius: 2rem;
+}
+.active-category,.category-btn:hover{
+    background-color: var(--danger-color);
+    color: var(--white-color);
+}

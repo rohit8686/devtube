@@ -1,0 +1,19 @@
+.fixed-bottom{
+    position: fixed;
+    bottom: 0;
+}
+.bottom-nav{
+    width:100%;
+    background: var(--black-color);
+    color:var(--white-color);
+    z-index: 1;
+    display: none;
+}
+.bottom-nav-active{
+    border-bottom: 2px solid var(--white-color);
+}
+@media screen and (max-width:480px) {
+    .bottom-nav-text{
+        display: none;
+    }
+}

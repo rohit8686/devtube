@@ -1,0 +1,14 @@
+.video-options-btn{
+    display: block;
+    width: 100%;
+    border:none;
+    background: none;
+    font-size: 1rem;
+    padding:0.5rem 1rem;
+    color: var(--white-color);
+    cursor: pointer;
+}
+.video-options{
+    background-color: var(--black-color);
+    border-radius: 0.5rem;
+}
