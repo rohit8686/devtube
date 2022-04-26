@@ -26,17 +26,10 @@ export function Login() {
               className="input"
               required
               value={authState.email}
-              onChange={(e) => {
-                authDispatch({ type: "EMAIL", payload: e.target.value });
-                authDispatch({
-                  type: "ERROR",
-                  payload: "",
-                });
-              }}
+              onChange={(e) =>
+                authDispatch({ type: "EMAIL", payload: e.target.value })
+              }
             />
-            {!authState.email && (
-              <p className="incorrect small-text">Please enter email address</p>
-            )}
           </div>
           <div className="pt-1">
             <label htmlFor="password">Password</label>
@@ -49,17 +42,10 @@ export function Login() {
               className="input"
               required
               value={authState.password}
-              onChange={(e) => {
-                authDispatch({
-                  type: "ERROR",
-                  payload: "",
-                });
-                authDispatch({ type: "PASSWORD", payload: e.target.value });
-              }}
+              onChange={(e) =>
+                authDispatch({ type: "PASSWORD", payload: e.target.value })
+              }
             />
-            {!authState.password && (
-              <p className="incorrect small-text">Please enter password</p>
-            )}
           </div>
           <div className="pt-1 pb-1 flex flex-start small-gap">
             <input type="checkbox" name="checkbox" id="checkbox" />
