@@ -1,15 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import "./sidebar.css";
 
 export const Sidebar = () => {
+  const location = useLocation();
+  const { videoId } = useParams();
+
   return (
     <div className="align-self-start sticky sidebar">
       <NavLink
         to="/videos"
         className={({ isActive }) =>
           `flex flex-start no-wrap sidebar-link link px-1 ${
-            isActive ? "active-link" : ""
+            isActive || location.pathname === `/video/${videoId}`
+              ? "active-link"
+              : ""
           }`
         }
       >

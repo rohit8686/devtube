@@ -1,6 +1,6 @@
 import { React, createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toastContainer } from "../components/Toast/Toast";
 
 const AuthContext = createContext();
@@ -8,6 +8,8 @@ const useAuth = () => useContext(AuthContext);
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const initialState = {
     email: "",
     password: "",
@@ -32,7 +34,6 @@ function AuthProvider({ children }) {
         email: authState.email,
         password: authState.password,
       });
-      console.log(data);
       const { foundUser, encodedToken } = data;
       if (status === 200 || status === 201) {
         localStorage.setItem("userToken", encodedToken);
@@ -42,7 +43,8 @@ function AuthProvider({ children }) {
           payload: { foundUser, encodedToken },
         });
         authDispatch({ type: "RESET_FORM" });
-        navigate("/", { replace: true });
+        navigate(location?.state?.from?.pathname || "/", { replace: true });
+        toastContainer("Login successfull", "success");
       } else if (status === 401) {
         authDispatch({ type: "ERROR", payload: "Incorrect password" });
         setTimeout(() => authDispatch({ type: "ERROR", payload: "" }), 5000);
@@ -66,7 +68,7 @@ function AuthProvider({ children }) {
     localStorage.removeItem("userData");
     authDispatch({ type: "CLEAR_AUTH_DATA" });
     navigate("/", { replace: true });
-    toastContainer("Logged out", "info");
+    toastContainer("Logged out", "error");
   };
 
   const signup = async () => {
@@ -85,8 +87,10 @@ function AuthProvider({ children }) {
         });
         authDispatch({ type: "RESET_FORM" });
         navigate("/", { replace: true });
+        toastContainer("Sign in successfull", "success");
       }
     } catch (e) {
+      console.log(e);
       if (e.response.status === 422) {
         authDispatch({ type: "ERROR", payload: "Email Already Exists." });
       }

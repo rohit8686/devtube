@@ -15,9 +15,7 @@ root.render(
   <BrowserRouter>
     <AuthProvider>
       <VideosProvider>
-        <React.StrictMode>
           <App />
-        </React.StrictMode>
       </VideosProvider>
     </AuthProvider>
   </BrowserRouter>
