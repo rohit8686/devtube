@@ -1,15 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import "./bottomNav.css";
 
 export const BottomNav = () => {
+  const location = useLocation();
+  const { videoId } = useParams();
+
   return (
     <div className="bottom-nav flex space-between no-wrap fixed-bottom">
       <NavLink
         to="/videos"
         className={({ isActive }) =>
-          `flex flex-start no-wrap sidebar-link link px-1 ${
-            isActive ? "bottom-nav-active" : ""
+          `flex flex-start no-wrap bottom-nav-link link px-1 ${
+            isActive || location.pathname === `/video/${videoId}`
+              ? "bottom-nav-active"
+              : ""
           }`
         }
       >
@@ -19,7 +24,7 @@ export const BottomNav = () => {
       <NavLink
         to="/liked"
         className={({ isActive }) =>
-          `flex flex-start no-wrap sidebar-link link px-1 ${
+          `flex flex-start no-wrap bottom-nav-link link px-1 ${
             isActive ? "bottom-nav-active" : ""
           }`
         }
@@ -30,7 +35,7 @@ export const BottomNav = () => {
       <NavLink
         to="/history"
         className={({ isActive }) =>
-          `flex flex-start no-wrap sidebar-link link px-1 ${
+          `flex flex-start no-wrap bottom-nav-link link px-1 ${
             isActive ? "bottom-nav-active" : ""
           }`
         }
@@ -41,7 +46,7 @@ export const BottomNav = () => {
       <NavLink
         to="/playlist"
         className={({ isActive }) =>
-          `flex flex-start no-wrap sidebar-link link px-1 ${
+          `flex flex-start no-wrap bottom-nav-link link px-1 ${
             isActive ? "bottom-nav-active" : ""
           }`
         }
@@ -52,7 +57,7 @@ export const BottomNav = () => {
       <NavLink
         to="/watchlater"
         className={({ isActive }) =>
-          `flex flex-start no-wrap sidebar-link link px-1 ${
+          `flex flex-start no-wrap bottom-nav-link link px-1 ${
             isActive ? "bottom-nav-active" : ""
           }`
         }

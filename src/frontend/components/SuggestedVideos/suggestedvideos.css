@@ -1,0 +1,12 @@
+@media screen and (max-width:600px) {
+    .suggested-videos {
+        display: flex;
+        gap:1rem;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .suggested-video{
+        flex-grow: 1;
+    }
+}

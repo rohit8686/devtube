@@ -1,8 +1,7 @@
 .width{
-    width:80%;
-    margin: auto;
+    width:100%;
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:800px) {
     .bottom-nav{
         display: flex;
     }

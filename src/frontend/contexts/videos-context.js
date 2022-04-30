@@ -40,8 +40,8 @@ const VideosProvider = ({ children }) => {
     initialState
   );
 
-  let videosData = [];
-  videosData =
+  let categoryWiseData = [];
+  categoryWiseData =
     videoState.category === "All"
       ? videos
       : videos.filter((video) => video.category === videoState.category);
@@ -55,7 +55,13 @@ const VideosProvider = ({ children }) => {
 
   return (
     <VideosContext.Provider
-      value={{ videos, videosData, categories, videoState, videoDispatch }}
+      value={{
+        videos,
+        categoryWiseData,
+        categories,
+        videoState,
+        videoDispatch,
+      }}
     >
       {children}
     </VideosContext.Provider>

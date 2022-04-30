@@ -12,6 +12,10 @@
 .bottom-nav-active{
     border-bottom: 2px solid var(--white-color);
 }
+.bottom-nav-link{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
 @media screen and (max-width:480px) {
     .bottom-nav-text{
         display: none;
