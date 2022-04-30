@@ -11,10 +11,10 @@ export const Video = () => {
   const { videoId } = useParams();
   const { videos } = useVideos();
   const singleVideo = videos.find((video) => video._id === videoId);
-  const { _id, views, video, title, creator, description } = singleVideo;
+  const { views, video, title, creator, description } = singleVideo;
 
   return (
-    <div className="flex align-start no-wrap wrap-suggested-videos" key={_id}>
+    <div className="flex align-start no-wrap wrap-suggested-videos">
       <div className="p-1 video">
         <div className="player-wrapper">
           <ReactPlayer
