@@ -14,7 +14,7 @@ export const Liked = () => {
 
   useEffect(() => {
     getLikedVideos();
-  }, [getLikedVideos]);
+  }, []);
 
   return (
     <>
@@ -68,9 +68,9 @@ export const Liked = () => {
               </div>
             );
           })}
-          <ToastContainer />
         </div>
       )}
+      <ToastContainer />
     </>
   );
 };

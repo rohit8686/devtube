@@ -1,7 +1,84 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { useHistory } from "../../contexts/history-context";
+import { HistoryOptions } from "../../components/HistoryOptions/HistoryOptions";
 
 export const History = () => {
+  const [showHistoryOptions, setShowHistoryOptions] = useState(false);
+  const [historyOptionId, setHistoryOptionId] = useState("");
+  const {
+    historyState: { historyVideos },
+    getHistoryVideos,
+    clearHistory,
+  } = useHistory();
+
+  useEffect(() => {
+    getHistoryVideos();
+  }, []);
+
   return (
-    <div>History</div>
-  )
-}
+    <>
+      <h2 className="text-center">History</h2>
+      <div className="underline"></div>
+      {historyVideos.length === 0 ? (
+        <>
+          <h3 className="text-center pt-1">There are no videos watched !</h3>
+          <Link to="/videos" className="link flex pt-1">
+            <button className="btn btn-primary">Go to videos</button>
+          </Link>
+        </>
+      ) : (
+        <>
+          <div className="flex pt-1">
+            <button className="btn btn-primary" onClick={clearHistory}>
+              Clear History
+            </button>
+          </div>
+          <div className="flex pt-1 pb-4">
+            {historyVideos.map(({ _id, video, creator, title }) => {
+              return (
+                <div className="card card-width m-0" key={_id}>
+                  <Link to={`/video/${_id}`} className="link">
+                    <img
+                      className="img img-border img-dimensions"
+                      src={`https://i.ytimg.com/vi/${video}/hqdefault.jpg`}
+                      alt="video-thumbnail"
+                    />
+                  </Link>
+                  <div className="relative">
+                    <div className="p-1">
+                      <div className="flex space-between no-wrap">
+                        <h3>{title}</h3>
+                        <span
+                          className="material-icons-outlined align-self-start"
+                          onClick={() => {
+                            historyOptionId === _id
+                              ? setShowHistoryOptions(!showHistoryOptions)
+                              : setShowHistoryOptions(true);
+                            setHistoryOptionId(_id);
+                          }}
+                        >
+                          more_vert
+                        </span>
+                      </div>
+                      <h5 className="pt-1">{creator}</h5>
+                    </div>
+                    <div className="absolute">
+                      {showHistoryOptions && historyOptionId === _id ? (
+                        <HistoryOptions historyId={_id} />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+      <ToastContainer />
+    </>
+  );
+};
