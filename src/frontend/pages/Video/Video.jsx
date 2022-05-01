@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { SuggestedVideos } from "../../components/SuggestedVideos/SuggestedVideos";
+import { useLike } from "../../contexts/like-context";
 import { useVideos } from "../../contexts/videos-context";
 import img from "../../images/image.ico";
 import "./video.css";
@@ -10,8 +11,13 @@ import "./video.css";
 export const Video = () => {
   const { videoId } = useParams();
   const { videos } = useVideos();
+  const {
+    likeState: { likedVideos },
+    addToLikedVideos,
+    removeFromLikedVideos,
+  } = useLike();
   const singleVideo = videos.find((video) => video._id === videoId);
-  const { views, video, title, creator, description } = singleVideo;
+  const { _id, views, video, title, creator, description } = singleVideo;
 
   return (
     <div className="flex align-start no-wrap wrap-suggested-videos">
@@ -29,11 +35,26 @@ export const Video = () => {
           <div className="flex space-between no-wrap pt-1">
             <p className="grey-text">{views} views</p>
             <div className="flex no-wrap">
-              <button className="video-btn flex no-wrap small-gap">
+              <button
+                className={`video-btn flex no-wrap small-gap ${
+                  likedVideos.some((video) => video._id === videoId)
+                    ? "liked"
+                    : ""
+                }`}
+                onClick={() =>
+                  likedVideos.some((video) => video._id === videoId)
+                    ? removeFromLikedVideos(_id)
+                    : addToLikedVideos(_id)
+                }
+              >
                 <span className="material-icons-outlined video-icon">
                   thumb_up
                 </span>
-                <p className="single-video-options">Like</p>
+                <p className="single-video-options">
+                  {likedVideos.some((video) => video._id === videoId)
+                    ? "Liked"
+                    : "Like"}
+                </p>
               </button>
               <button className="video-btn flex no-wrap small-gap">
                 <span className="material-icons-outlined video-icon">
