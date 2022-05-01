@@ -15,7 +15,7 @@ export const History = () => {
 
   useEffect(() => {
     getHistoryVideos();
-  }, []);
+  }, [getHistoryVideos]);
 
   return (
     <>

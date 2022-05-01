@@ -36,7 +36,6 @@ const LikeProvider = ({ children }) => {
       const res = await axios.get("/api/user/likes", {
         headers: { authorization: encodedToken },
       });
-      likeDispatch({ type: "LIKE", payload: res.data.likes });
       localStorage.setItem(
         "userData",
         JSON.stringify({

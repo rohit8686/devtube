@@ -36,7 +36,6 @@ const HistoryProvider = ({ children }) => {
       const res = await axios.get("/api/user/history", {
         headers: { authorization: encodedToken },
       });
-      historyDispatch({ type: "HISTORY", payload: res.data.history });
       localStorage.setItem(
         "userData",
         JSON.stringify({

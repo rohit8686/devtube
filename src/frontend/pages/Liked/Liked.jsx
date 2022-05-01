@@ -14,7 +14,7 @@ export const Liked = () => {
 
   useEffect(() => {
     getLikedVideos();
-  }, []);
+  }, [getLikedVideos]);
 
   return (
     <>
