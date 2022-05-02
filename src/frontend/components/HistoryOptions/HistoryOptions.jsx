@@ -1,0 +1,19 @@
+import React from "react";
+import { useHistory } from "../../contexts/history-context";
+import "../VideoOptions/videoOptions.css";
+
+export const HistoryOptions = ({ historyId }) => {
+  const { removeFromHistoryVideos } = useHistory();
+  return (
+    <div className="video-options">
+      <button className="video-options-btn">Add to Watch Later</button>
+      <button className="video-options-btn">Add to Playlist</button>
+      <button
+        className="video-options-btn"
+        onClick={() => removeFromHistoryVideos(historyId)}
+      >
+        Remove from history
+      </button>
+    </div>
+  );
+};

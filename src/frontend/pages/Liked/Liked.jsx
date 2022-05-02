@@ -68,9 +68,9 @@ export const Liked = () => {
               </div>
             );
           })}
-          <ToastContainer />
         </div>
       )}
+      <ToastContainer />
     </>
   );
 };

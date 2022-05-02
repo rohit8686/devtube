@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { SuggestedVideos } from "../../components/SuggestedVideos/SuggestedVideos";
+import { useHistory } from "../../contexts/history-context";
 import { useLike } from "../../contexts/like-context";
 import { useVideos } from "../../contexts/videos-context";
 import img from "../../images/image.ico";
@@ -16,6 +17,7 @@ export const Video = () => {
     addToLikedVideos,
     removeFromLikedVideos,
   } = useLike();
+  const { addToHistoryVideos } = useHistory();
   const singleVideo = videos.find((video) => video._id === videoId);
   const { _id, views, video, title, creator, description } = singleVideo;
 
@@ -28,6 +30,7 @@ export const Video = () => {
             controls
             url={`https://www.youtube.com/watch?v=${video}`}
             width="100%"
+            onStart={() => addToHistoryVideos(_id)}
           />
         </div>
         <div className="pt-1">
