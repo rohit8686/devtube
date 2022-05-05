@@ -3,6 +3,8 @@
 }
 .absolute{
     position: absolute;
+}
+.video-options-position{
     bottom:90%;
     right:0;
 }

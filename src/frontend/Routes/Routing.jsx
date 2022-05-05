@@ -5,6 +5,7 @@ import { Home } from "../pages/Home/Home";
 import { Liked } from "../pages/Liked/Liked";
 import { Login } from "../pages/Login/Login";
 import { Playlist } from "../pages/Playlist/Playlist";
+import { PlaylistItems } from "../pages/PlaylistItems/PlaylistItems";
 import { Signup } from "../pages/Signup/Signup";
 import { Video } from "../pages/Video/Video";
 import { Videos } from "../pages/Videos/Videos";
@@ -24,6 +25,7 @@ export const Routing = () => {
         <Route path="/history" element={<History />} />
         <Route path="/watchlater" element={<WatchLater />} />
         <Route path="/playlist" element={<Playlist />} />
+        <Route path="/playlist/:playlistId" element={<PlaylistItems />} />
       </Route>
     </Routes>
   );

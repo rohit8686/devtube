@@ -1,0 +1,16 @@
+.playlist-count-bg{
+    width: 40%;
+    height: 12rem;
+    opacity: 0.8;
+    background-color: var(--black-color);
+    top:0;
+    right: 0;
+}
+.playlist-count{
+    width: 40%;
+    height: 12rem;
+    color:var(--white-color);
+    top:0;
+    right:0;
+    font-size: 2rem;
+}

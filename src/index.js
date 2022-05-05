@@ -8,6 +8,7 @@ import { VideosProvider } from "./frontend/contexts/videos-context";
 import { AuthProvider } from "./frontend/contexts/auth-context";
 import { LikeProvider } from "./frontend/contexts/like-context";
 import { HistoryProvider } from "./frontend/contexts/history-context";
+import { PlaylistProvider } from "./frontend/contexts/playlist-context";
 
 // Call make Server
 makeServer();
@@ -19,7 +20,9 @@ root.render(
       <VideosProvider>
         <LikeProvider>
           <HistoryProvider>
-            <App />
+            <PlaylistProvider>
+              <App />
+            </PlaylistProvider>
           </HistoryProvider>
         </LikeProvider>
       </VideosProvider>
