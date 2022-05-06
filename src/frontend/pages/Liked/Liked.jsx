@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { LikeOptions } from "../../components/LikeOptions/LikeOptions";
+import { PlaylistModal } from "../../components/PlaylistModal/PlaylistModal";
 import { useLike } from "../../contexts/like-context";
 
 export const Liked = () => {
   const [showLikeOptions, setShowLikeOptions] = useState(false);
+  const [showPlaylistModal, setShowPlaylistModal] = useState(false);
   const [likeOptionId, setLikeOptionId] = useState("");
   const {
     likeState: { likedVideos },
@@ -57,14 +59,23 @@ export const Liked = () => {
                     </div>
                     <h5 className="pt-1">{creator}</h5>
                   </div>
-                  <div className="absolute">
+                  <div className="absolute video-options-position">
                     {showLikeOptions && likeOptionId === _id ? (
-                      <LikeOptions videoId={_id} />
+                      <LikeOptions
+                        videoId={_id}
+                        showPlaylistModal={showPlaylistModal}
+                        setShowPlaylistModal={setShowPlaylistModal}
+                      />
                     ) : (
                       ""
                     )}
                   </div>
                 </div>
+                <PlaylistModal
+                  showPlaylistModal={showPlaylistModal}
+                  setShowPlaylistModal={setShowPlaylistModal}
+                  videoId={_id}
+                />
               </div>
             );
           })}
