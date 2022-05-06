@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { useVideos } from "../../contexts/videos-context";
 import { Categories } from "../Categories/Categories";
 import { VideoOptions } from "../VideoOptions/VideoOptions";
@@ -42,9 +43,9 @@ export const VideoListing = () => {
                   </div>
                   <h5 className="pt-1">{creator}</h5>
                 </div>
-                <div className="absolute">
+                <div className="absolute video-options-position">
                   {showVideoOptions && videoOptionId === _id ? (
-                    <VideoOptions />
+                    <VideoOptions videoId={_id} />
                   ) : (
                     ""
                   )}
@@ -54,6 +55,7 @@ export const VideoListing = () => {
           );
         })}
       </div>
+      <ToastContainer />
     </>
   );
 };

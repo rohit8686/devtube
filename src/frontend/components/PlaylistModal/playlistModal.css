@@ -1,0 +1,7 @@
+.modal-bg{
+    z-index: 2;
+    overflow: auto;
+}
+.modal{
+    width: fit-content;
+}

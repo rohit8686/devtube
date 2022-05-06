@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useHistory } from "../../contexts/history-context";
 import { HistoryOptions } from "../../components/HistoryOptions/HistoryOptions";
+import { PlaylistModal } from "../../components/PlaylistModal/PlaylistModal";
 
 export const History = () => {
+  const [showPlaylistModal, setShowPlaylistModal] = useState(false);
   const [showHistoryOptions, setShowHistoryOptions] = useState(false);
   const [historyOptionId, setHistoryOptionId] = useState("");
   const {
@@ -64,14 +66,23 @@ export const History = () => {
                       </div>
                       <h5 className="pt-1">{creator}</h5>
                     </div>
-                    <div className="absolute">
+                    <div className="absolute video-options-position">
                       {showHistoryOptions && historyOptionId === _id ? (
-                        <HistoryOptions historyId={_id} />
+                        <HistoryOptions
+                          historyId={_id}
+                          showPlaylistModal={showPlaylistModal}
+                          setShowPlaylistModal={setShowPlaylistModal}
+                        />
                       ) : (
                         ""
                       )}
                     </div>
                   </div>
+                  <PlaylistModal
+                    showPlaylistModal={showPlaylistModal}
+                    setShowPlaylistModal={setShowPlaylistModal}
+                    videoId={_id}
+                  />
                 </div>
               );
             })}
