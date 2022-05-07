@@ -3,24 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { useWatchLater } from "../../contexts/watchlater-context";
 import { PlaylistModal } from "../PlaylistModal/PlaylistModal";
-import "./videoOptions.css";
+import "../VideoOptions/videoOptions.css";
 
-export const VideoOptions = ({ videoId }) => {
+export const WatchLaterOptions = ({ videoId }) => {
   const navigate = useNavigate();
   const {
     authState: { encodedToken },
   } = useAuth();
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
-  const { addToWatchLaterVideos } = useWatchLater();
+  const { removeFromWatchLaterVideos } = useWatchLater();
 
   return (
     <>
       <div className="video-options">
         <button
           className="video-options-btn"
-          onClick={() => addToWatchLaterVideos(videoId)}
+          onClick={() => removeFromWatchLaterVideos(videoId)}
         >
-          Add to Watch Later
+          Remove from Watch Later
         </button>
         <button
           className="video-options-btn"
