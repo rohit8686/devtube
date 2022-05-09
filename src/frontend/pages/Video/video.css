@@ -11,7 +11,7 @@
 .video-icon{
     font-size: 1.5rem;
 }
-.video-btn:hover,.liked {
+.video-btn:hover,.liked,.watch-later {
     background-color: var(--danger-color);
     color: var(--white-color);
 }
