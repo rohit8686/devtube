@@ -15,9 +15,9 @@ export const Navbar = () => {
         <h1 className="gradient-text">DevTube</h1>
       </Link>
       {encodedToken ? (
-        <button className="btn btn-error" onClick={logout}>
-          Logout
-        </button>
+        <Link to="/profile" className="link">
+          <span class="material-icons-outlined">account_circle</span>
+        </Link>
       ) : (
         <Link to="/login" className="link">
           <button className="btn btn-error">Login</button>
