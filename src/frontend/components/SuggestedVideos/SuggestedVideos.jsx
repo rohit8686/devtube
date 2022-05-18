@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useVideos } from "../../contexts/videos-context";
+import { useVideos } from "../../contexts/hook-export";
 import "./suggestedvideos.css";
 
 export const SuggestedVideos = () => {

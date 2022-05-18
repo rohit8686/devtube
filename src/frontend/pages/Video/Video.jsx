@@ -5,10 +5,12 @@ import { ToastContainer } from "react-toastify";
 import { PlaylistModal } from "../../components/PlaylistModal/PlaylistModal";
 import { SuggestedVideos } from "../../components/SuggestedVideos/SuggestedVideos";
 import { toastContainer } from "../../components/Toast/Toast";
-import { useHistory } from "../../contexts/history-context";
-import { useLike } from "../../contexts/like-context";
-import { useVideos } from "../../contexts/videos-context";
-import { useWatchLater } from "../../contexts/watchlater-context";
+import {
+  useHistory,
+  useLike,
+  useVideos,
+  useWatchLater,
+} from "../../contexts/hook-export";
 import img from "../../images/image.ico";
 import "./video.css";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { useVideos } from "../../contexts/videos-context";
+import { useVideos } from "../../contexts/hook-export";
 import "./categories.css";
 
 export const Categories = () => {

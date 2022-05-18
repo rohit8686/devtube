@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { PlaylistOptions } from "../../components/PlaylistOptions/PlaylistOptions";
-import { usePlaylist } from "../../contexts/playlist-context";
+import { usePlaylist } from "../../contexts/hook-export";
 import "./playlist.css";
 
 export const Playlist = () => {
