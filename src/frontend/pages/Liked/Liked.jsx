@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { LikeOptions } from "../../components/LikeOptions/LikeOptions";
 import { PlaylistModal } from "../../components/PlaylistModal/PlaylistModal";
-import { useLike } from "../../contexts/like-context";
+import { useLike } from "../../contexts/hook-export";
 
 export const Liked = () => {
   const [showLikeOptions, setShowLikeOptions] = useState(false);

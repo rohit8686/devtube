@@ -1,6 +1,6 @@
 import "../Login/login.css";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/auth-context";
+import { useAuth } from "../../contexts/hook-export";
 
 export function Signup() {
   const { authState, authDispatch, signup } = useAuth();

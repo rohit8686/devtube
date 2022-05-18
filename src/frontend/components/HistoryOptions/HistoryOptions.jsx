@@ -1,6 +1,5 @@
 import React from "react";
-import { useHistory } from "../../contexts/history-context";
-import { useWatchLater } from "../../contexts/watchlater-context";
+import { useHistory, useWatchLater } from "../../contexts/hook-export";
 import "../VideoOptions/videoOptions.css";
 
 export const HistoryOptions = ({

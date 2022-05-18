@@ -1,5 +1,5 @@
 import React from "react";
-import { usePlaylist } from "../../contexts/playlist-context";
+import { usePlaylist } from "../../contexts/hook-export";
 import "./playlistModal.css";
 
 export const PlaylistModal = ({

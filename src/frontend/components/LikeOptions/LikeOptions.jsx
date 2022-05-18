@@ -1,6 +1,5 @@
 import React from "react";
-import { useLike } from "../../contexts/like-context";
-import { useWatchLater } from "../../contexts/watchlater-context";
+import { useLike, useWatchLater } from "../../contexts/hook-export";
 import "../VideoOptions/videoOptions.css";
 
 export const LikeOptions = ({

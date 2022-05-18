@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { PlaylistVideoOptions } from "../../components/PlaylistVideoOptions/PlaylistVideoOptions";
-import { usePlaylist } from "../../contexts/playlist-context";
+import { usePlaylist } from "../../contexts/hook-export";
 
 export const PlaylistItems = () => {
   const { playlistId } = useParams();

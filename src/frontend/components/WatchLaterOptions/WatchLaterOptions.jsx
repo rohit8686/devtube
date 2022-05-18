@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/auth-context";
-import { useWatchLater } from "../../contexts/watchlater-context";
+import { useAuth, useWatchLater } from "../../contexts/hook-export";
 import { PlaylistModal } from "../PlaylistModal/PlaylistModal";
 import "../VideoOptions/videoOptions.css";
 
