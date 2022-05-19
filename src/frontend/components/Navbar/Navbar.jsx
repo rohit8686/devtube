@@ -15,7 +15,7 @@ export const Navbar = () => {
       </Link>
       {encodedToken ? (
         <Link to="/profile" className="link">
-          <span class="material-icons-outlined">account_circle</span>
+          <span className="material-icons-outlined">account_circle</span>
         </Link>
       ) : (
         <Link to="/login" className="link">
