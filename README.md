@@ -27,6 +27,8 @@ DevTube can be used to manage and access all the dev resources in a single place
 ### Public Screens : 
 * [Home](https://devtube-app.netlify.app/)
 * [Videos](https://devtube-app.netlify.app/videos)
+* [Login](https://devtube-app.netlify.app/login)
+* [Signup](https://devtube-app.netlify.app/signup)
 
 ### Private Screens :
 * [Liked Videos](https://devtube-app.netlify.app/liked)
