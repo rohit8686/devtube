@@ -30,7 +30,9 @@ export const Video = () => {
   } = useWatchLater();
   const { addToHistoryVideos } = useHistory();
   const singleVideo = videos.find((video) => video._id === videoId);
-  const { _id, views, video, title, creator, description } = singleVideo;
+  const { _id, views, video, title, creator, description, uploadDate } =
+    singleVideo;
+  const date = new Date(uploadDate).toLocaleDateString();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,7 +52,10 @@ export const Video = () => {
             />
           </div>
           <div className="pt-1">
-            <h3>{title}</h3>
+            <div className="flex space-between">
+              <h3>{title}</h3>
+              <p>Uploaded : {date}</p>
+            </div>
             <div className="flex space-between no-wrap pt-1">
               <p className="grey-text">{views} views</p>
               <div className="flex no-wrap">
