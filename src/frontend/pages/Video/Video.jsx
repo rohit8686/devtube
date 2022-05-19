@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -31,6 +31,10 @@ export const Video = () => {
   const { addToHistoryVideos } = useHistory();
   const singleVideo = videos.find((video) => video._id === videoId);
   const { _id, views, video, title, creator, description } = singleVideo;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
