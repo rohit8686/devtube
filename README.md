@@ -1,7 +1,7 @@
 # DevTube
 ![logo (2)](https://user-images.githubusercontent.com/88605957/169228048-d90b3e2e-67c3-43bf-8fa0-80cd7721bb41.png)
 
-
+[Live Link](https://devtube-app.netlify.app/)
 
 DevTube can be used to manage and access all the dev resources in a single place
 
