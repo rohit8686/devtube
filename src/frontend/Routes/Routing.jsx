@@ -4,6 +4,7 @@ import { History } from "../pages/History/History";
 import { Home } from "../pages/Home/Home";
 import { Liked } from "../pages/Liked/Liked";
 import { Login } from "../pages/Login/Login";
+import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
 import { Playlist } from "../pages/Playlist/Playlist";
 import { PlaylistItems } from "../pages/PlaylistItems/PlaylistItems";
 import { Signup } from "../pages/Signup/Signup";
@@ -21,6 +22,7 @@ export const Routing = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/profile" element={<UserProfile />} />
+      <Route path="*" element={<PageNotFound />} />
       <Route path="/" element={<PrivateRoute />}>
         <Route path="/video/:videoId" element={<Video />} />
         <Route path="/liked" element={<Liked />} />
