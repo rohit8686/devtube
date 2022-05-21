@@ -14,7 +14,7 @@ export const Playlist = () => {
 
   return (
     <>
-      <h2 className="text-center">Playlists</h2>
+      <h2 className="text-center pt-1">Playlists</h2>
       <div className="underline"></div>
       {playlistData.length === 0 ? (
         <>

@@ -9,7 +9,7 @@ export const Navbar = () => {
   } = useAuth();
 
   return (
-    <nav className="flex space-between p-1">
+    <nav className="navbar flex space-between p-1">
       <Link to="/" className="link">
         <h1 className="gradient-text">DevTube</h1>
       </Link>

@@ -20,7 +20,7 @@ export const Liked = () => {
 
   return (
     <>
-      <h2 className="text-center">Liked Videos</h2>
+      <h2 className="text-center pt-1">Liked Videos</h2>
       <div className="underline"></div>
       {likedVideos.length === 0 ? (
         <>

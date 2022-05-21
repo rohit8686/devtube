@@ -15,7 +15,7 @@ export const WatchLater = () => {
 
   return (
     <>
-      <h2 className="text-center">Watch Later</h2>
+      <h2 className="text-center pt-1">Watch Later</h2>
       <div className="underline"></div>
       {watchLaterVideos.length === 0 ? (
         <>

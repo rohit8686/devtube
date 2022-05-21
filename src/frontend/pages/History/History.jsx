@@ -21,7 +21,7 @@ export const History = () => {
 
   return (
     <>
-      <h2 className="text-center">History</h2>
+      <h2 className="text-center pt-1">History</h2>
       <div className="underline"></div>
       {historyVideos.length === 0 ? (
         <>

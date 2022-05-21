@@ -7,7 +7,7 @@ export const Sidebar = () => {
   const { videoId } = useParams();
 
   return (
-    <div className="align-self-start sticky sidebar">
+    <div className="align-self-start sticky sidebar pt-1">
       <NavLink
         to="/videos"
         className={({ isActive }) =>

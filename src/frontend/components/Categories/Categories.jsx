@@ -5,7 +5,7 @@ import "./categories.css";
 export const Categories = () => {
   const { categories, videoState, videoDispatch } = useVideos();
   return (
-    <div className="flex">
+    <div className="flex pt-1">
       {categories.map((category, index) => {
         return (
           <button
