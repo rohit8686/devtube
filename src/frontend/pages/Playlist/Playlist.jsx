@@ -18,7 +18,7 @@ export const Playlist = () => {
       <div className="underline"></div>
       {playlistData.length === 0 ? (
         <>
-          <h3 className="text-center pt-1">No Playlists are created</h3>
+          <h3 className="text-center pt-1">No Playlists are created !</h3>
           <Link to="/videos" className="link">
             <div className="flex pt-1">
               <button className="btn btn-primary">Go to Videos</button>
@@ -51,9 +51,11 @@ export const Playlist = () => {
                   <div className="relative">
                     <div className="p-1">
                       <div className="flex space-between no-wrap">
-                        <h3>{title}</h3>
+                        <Link to={`/playlist/${_id}`} className="link">
+                          <h3>{title}</h3>
+                        </Link>
                         <span
-                          className="material-icons-outlined align-self-start"
+                          className="material-icons-outlined align-self-start options-btn"
                           onClick={() => {
                             videoOptionId === _id
                               ? setShowVideoOptions(!showVideoOptions)

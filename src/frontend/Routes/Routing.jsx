@@ -23,8 +23,8 @@ export const Routing = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="*" element={<PageNotFound />} />
+      <Route path="/video/:videoId" element={<Video />} />
       <Route path="/" element={<PrivateRoute />}>
-        <Route path="/video/:videoId" element={<Video />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/history" element={<History />} />
         <Route path="/watchlater" element={<WatchLater />} />

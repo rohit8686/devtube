@@ -3,5 +3,10 @@
     overflow: auto;
 }
 .modal{
-    width: fit-content;
+    width: 20rem;
+    text-align: justify;
+    overflow: auto;
+}
+.playlist-title{
+    cursor: pointer;
 }

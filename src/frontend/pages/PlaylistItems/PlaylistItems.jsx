@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { PlaylistVideoOptions } from "../../components/PlaylistVideoOptions/PlaylistVideoOptions";
 import { usePlaylist } from "../../contexts/hook-export";
+import img from "../../images/image.ico";
 
 export const PlaylistItems = () => {
   const { playlistId } = useParams();
@@ -19,7 +20,7 @@ export const PlaylistItems = () => {
     <>
       {playlistVideos.length === 0 ? (
         <>
-          <h2 className="text-center">No Videos in this playlist</h2>
+          <h2 className="text-center pt-1">No Videos in this playlist</h2>
           <Link to="/playlist" className="link">
             <div className="flex pt-1">
               <button className="btn btn-primary">Back to playlists</button>
@@ -41,9 +42,11 @@ export const PlaylistItems = () => {
                 <div className="relative">
                   <div className="p-1">
                     <div className="flex space-between no-wrap">
-                      <h3>{title}</h3>
+                      <Link to={`/video/${_id}`} className="link">
+                        <h3>{title}</h3>
+                      </Link>
                       <span
-                        className="material-icons-outlined align-self-start"
+                        className="material-icons-outlined align-self-start options-btn"
                         onClick={() => {
                           videoOptionId === _id
                             ? setShowVideoOptions(!showVideoOptions)
@@ -54,7 +57,12 @@ export const PlaylistItems = () => {
                         more_vert
                       </span>
                     </div>
-                    <h5 className="pt-1">{creator}</h5>
+                    <Link to={`/video/${_id}`} className="link">
+                      <div className="flex flex-start pt-1">
+                        <img src={img} alt="avatar" className="avatar sm" />
+                        <h5>{creator}</h5>
+                      </div>
+                    </Link>
                   </div>
                   <div className="absolute video-options-position">
                     {showVideoOptions && videoOptionId === _id ? (

@@ -1,7 +1,10 @@
 import axios from "axios";
-import { createContext, useContext, useReducer } from "react";
-import { useVideos } from "./videos-context";
-import { useAuth } from "./auth-context";
+import { createContext, useContext, useReducer, useEffect } from "react";
+import { useVideos, useAuth } from "./hook-export";
+import {
+  initialState,
+  playlistReducerFunction,
+} from "../reducerFunctions/playlistReducerFunction";
 import { toastContainer } from "../components/Toast/Toast";
 
 const PlaylistContext = createContext();
@@ -14,29 +17,11 @@ const PlaylistProvider = ({ children }) => {
     authState: { encodedToken },
   } = useAuth();
 
-  const initialState = {
-    playlistName: "",
-    playlistData: [],
-  };
-
-  const playlistReducerFunction = (playlistState, action) => {
-    switch (action.type) {
-      case "PLAYLIST_DATA":
-        return {
-          ...playlistState,
-          playlistData: action.payload,
-        };
-      case "PLAYLIST_NAME":
-        return {
-          ...playlistState,
-          playlistName: action.payload,
-        };
-      case "CLEAR_PLAYLIST":
-        return { ...playlistState, selectedPlaylists: [] };
-      default:
-        return { ...initialState };
+  useEffect(() => {
+    if (!encodedToken) {
+      playlistDispatch({ type: "PLAYLIST_DATA", payload: [] });
     }
-  };
+  }, [encodedToken]);
 
   const getPlaylistVideos = async () => {
     try {
@@ -57,32 +42,37 @@ const PlaylistProvider = ({ children }) => {
 
   const createPlaylist = async () => {
     try {
-      if (playlistState.playlistName) {
-        const res = await axios.post(
-          "/api/user/playlists",
-          {
-            playlist: {
-              title: playlistState.playlistName,
+      if (encodedToken) {
+        if (playlistState.playlistName) {
+          const res = await axios.post(
+            "/api/user/playlists",
+            {
+              playlist: {
+                title: playlistState.playlistName,
+              },
             },
-          },
-          {
-            headers: { authorization: encodedToken },
-          }
-        );
-        playlistDispatch({
-          type: "PLAYLIST_DATA",
-          payload: res.data.playlists,
-        });
-        localStorage.setItem(
-          "userData",
-          JSON.stringify({
-            ...userData,
-            playlists: res.data.playlists,
-          })
-        );
-        toastContainer("Playlist added", "success");
+            {
+              headers: { authorization: encodedToken },
+            }
+          );
+          addVideoToPlaylist();
+          playlistDispatch({
+            type: "PLAYLIST_DATA",
+            payload: res.data.playlists,
+          });
+          localStorage.setItem(
+            "userData",
+            JSON.stringify({
+              ...userData,
+              playlists: res.data.playlists,
+            })
+          );
+          toastContainer("Playlist added", "success");
+        } else {
+          toastContainer("Enter valid playlist name", "warning");
+        }
       } else {
-        toastContainer("Enter valid playlist name", "warning");
+        toastContainer("Please login !", "error");
       }
     } catch (err) {
       console.error(err);

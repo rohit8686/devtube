@@ -1,7 +1,11 @@
-import { React, createContext, useContext, useReducer, useEffect } from "react";
+import { React, createContext, useContext, useReducer } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toastContainer } from "../components/Toast/Toast";
+import {
+  initialState,
+  authReducerFunction,
+} from "../reducerFunctions/authReducerFunction";
 
 const AuthContext = createContext();
 const useAuth = () => useContext(AuthContext);
@@ -10,23 +14,10 @@ function AuthProvider({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const initialState = {
-    email: "",
-    password: "",
-    errorMsg: "",
-    userData: "",
-    encodedToken: "",
-  };
   const [authState, authDispatch] = useReducer(
     authReducerFunction,
     initialState
   );
-
-  useEffect(() => {
-    if (localStorage.getItem("userToken")) {
-      authDispatch({ type: "LOCAL_STORAGE_DATA" });
-    }
-  }, []);
 
   const login = async () => {
     try {
@@ -43,8 +34,8 @@ function AuthProvider({ children }) {
           payload: { foundUser, encodedToken },
         });
         authDispatch({ type: "RESET_FORM" });
+        setTimeout(() => toastContainer("Login successfull", "success"), 400);
         navigate(location?.state?.from?.pathname || "/", { replace: true });
-        toastContainer("Login successfull", "success");
       } else if (status === 401) {
         authDispatch({ type: "ERROR", payload: "Incorrect password" });
         setTimeout(() => authDispatch({ type: "ERROR", payload: "" }), 5000);
@@ -63,12 +54,13 @@ function AuthProvider({ children }) {
       console.error("Login error is ", e);
     }
   };
+
   const logout = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("userData");
     authDispatch({ type: "CLEAR_AUTH_DATA" });
+    setTimeout(() => toastContainer("Logged out", "error"), 400);
     navigate("/", { replace: true });
-    toastContainer("Logged out", "error");
   };
 
   const signup = async () => {
@@ -86,8 +78,8 @@ function AuthProvider({ children }) {
           payload: { createdUser, encodedToken },
         });
         authDispatch({ type: "RESET_FORM" });
+        setTimeout(() => toastContainer("Sign in successfull", "success"), 400);
         navigate("/", { replace: true });
-        toastContainer("Sign in successfull", "success");
       }
     } catch (e) {
       console.log(e);
@@ -99,38 +91,6 @@ function AuthProvider({ children }) {
       console.error("Signup error is ", e);
     }
   };
-
-  function authReducerFunction(authState, action) {
-    switch (action.type) {
-      case "EMAIL":
-        return { ...authState, email: action.payload };
-      case "PASSWORD":
-        return { ...authState, password: action.payload };
-      case "RESET_FORM":
-        return { ...authState, email: "", password: "" };
-      case "CLEAR_AUTH_DATA":
-        return { ...initialState };
-      case "ERROR":
-        return { ...authState, errorMsg: action.payload };
-      case "TEST_CREDENTIALS":
-        return { ...authState, email: "rohit@gmail.com", password: "rohit" };
-      case "USER_DATA":
-        const { foundUser, encodedToken } = action.payload;
-        return {
-          ...authState,
-          userData: foundUser,
-          encodedToken,
-        };
-      case "LOCAL_STORAGE_DATA":
-        return {
-          ...authState,
-          userData: JSON.parse(localStorage.getItem("userData")),
-          encodedToken: localStorage.getItem("userToken"),
-        };
-      default:
-        return { ...authState };
-    }
-  }
 
   return (
     <AuthContext.Provider
