@@ -36,7 +36,6 @@ export const VideoListing = () => {
       <div className="flex pt-1 pb-4">
         {(sortedVideos || categoryWiseData).map(
           ({ _id, video, creator, title, duration, uploadDate, views }) => {
-            const date = new Date(uploadDate).toLocaleDateString();
             return (
               <div className="card card-width m-0" key={_id}>
                 <Link to={`/video/${_id}`} className="link">
