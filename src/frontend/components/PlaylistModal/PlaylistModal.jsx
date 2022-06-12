@@ -52,6 +52,18 @@ export const PlaylistModal = ({
             });
           }}
         />
+        <button
+          className="outline-btn"
+          onClick={() => {
+            createPlaylist();
+            playlistDispatch({
+              type: "PLAYLIST_NAME",
+              payload: "",
+            });
+          }}
+        >
+          Create Playlist
+        </button>
         {playlistData.map(({ _id, title, videos }) => {
           return (
             <div className="flex flex-start small-gap pt-1" key={_id}>
@@ -70,7 +82,9 @@ export const PlaylistModal = ({
                   videos.some((video) => video._id === videoId) ? true : false
                 }
               />
-              <label htmlFor={title}>{title}</label>
+              <label htmlFor={title} className="playlist-title">
+                {title}
+              </label>
             </div>
           );
         })}

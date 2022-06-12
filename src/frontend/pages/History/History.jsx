@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { useHistory } from "../../contexts/hook-export";
 import { HistoryOptions } from "../../components/HistoryOptions/HistoryOptions";
 import { PlaylistModal } from "../../components/PlaylistModal/PlaylistModal";
+import img from "../../images/image.ico";
 
 export const History = () => {
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
@@ -51,9 +52,11 @@ export const History = () => {
                   <div className="relative">
                     <div className="p-1">
                       <div className="flex space-between no-wrap">
-                        <h3>{title}</h3>
+                        <Link to={`/video/${_id}`} className="link">
+                          <h3>{title}</h3>
+                        </Link>
                         <span
-                          className="material-icons-outlined align-self-start"
+                          className="material-icons-outlined align-self-start options-btn"
                           onClick={() => {
                             historyOptionId === _id
                               ? setShowHistoryOptions(!showHistoryOptions)
@@ -64,7 +67,12 @@ export const History = () => {
                           more_vert
                         </span>
                       </div>
-                      <h5 className="pt-1">{creator}</h5>
+                      <Link to={`/video/${_id}`} className="link">
+                        <div className="flex flex-start pt-1">
+                          <img src={img} alt="avatar" className="avatar sm" />
+                          <h4>{creator}</h4>
+                        </div>
+                      </Link>
                     </div>
                     <div className="absolute video-options-position">
                       {showHistoryOptions && historyOptionId === _id ? (

@@ -1,8 +1,12 @@
 import axios from "axios";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import { useVideos } from "./videos-context";
 import { useAuth } from "./auth-context";
 import { toastContainer } from "../components/Toast/Toast";
+import {
+  historyReducerFunction,
+  initialState,
+} from "../reducerFunctions/historyReducerFunction";
 
 const HistoryContext = createContext();
 const useHistory = () => useContext(HistoryContext);
@@ -15,21 +19,11 @@ const HistoryProvider = ({ children }) => {
     authState: { encodedToken },
   } = useAuth();
 
-  const initialState = {
-    historyVideos: [],
-  };
-
-  const historyReducerFunction = (historyState, action) => {
-    switch (action.type) {
-      case "HISTORY":
-        return {
-          ...historyState,
-          historyVideos: action.payload,
-        };
-      default:
-        return { ...initialState };
+  useEffect(() => {
+    if (!encodedToken) {
+      historyDispatch({ type: "HISTORY", payload: [] });
     }
-  };
+  }, [encodedToken]);
 
   const getHistoryVideos = async () => {
     try {

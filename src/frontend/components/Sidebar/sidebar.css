@@ -7,6 +7,9 @@
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
 }
+.sidebar{
+    width: 13rem;
+}
 .sidebar-link{
     padding-top: 0.7rem;
     padding-bottom:0.7rem;

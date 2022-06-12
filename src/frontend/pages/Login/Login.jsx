@@ -58,12 +58,12 @@ export function Login() {
           </div>
           <button className="btn btn-primary full-width mt-1">Login</button>
           &nbsp;
-          <p
-            className="flex outline-btn"
+          <button
+            className="flex outline-btn full-width"
             onClick={() => authDispatch({ type: "TEST_CREDENTIALS" })}
           >
             Login with test credentials
-          </p>
+          </button>
           <h3 className="flex pt-1 incorrect">{authState.errorMsg}</h3>
           <Link to="/signup" className="link">
             <div className="flex small-gap">

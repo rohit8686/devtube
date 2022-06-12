@@ -1,1 +1,5 @@
 @import url("https://spiralui.netlify.app/index.css");
+
+.card{
+    cursor: default;
+}

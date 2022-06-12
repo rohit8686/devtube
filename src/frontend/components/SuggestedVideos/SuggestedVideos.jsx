@@ -8,7 +8,7 @@ export const SuggestedVideos = () => {
   const { videos } = useVideos();
   const { videoId } = useParams();
   const suggestedVideos = videos
-    .filter((video) => video._id !== videoId)
+    .filter((video) => video._id !== Number(videoId))
     .slice(1, 5);
 
   return (

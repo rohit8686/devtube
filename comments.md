@@ -1,0 +1,4 @@
+- fixed single video page refresh issue
+- added more videos
+- made videos public 
+- UI/UX fixes

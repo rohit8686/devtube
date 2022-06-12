@@ -5,6 +5,10 @@ import {
   useState,
   useReducer,
 } from "react";
+import {
+  videoReducerFunction,
+  initialState,
+} from "../reducerFunctions/videoReducerFuntion";
 import axios from "axios";
 
 const VideosContext = createContext();
@@ -20,20 +24,7 @@ const VideosProvider = ({ children }) => {
     { All: videos }
   );
 
-  const initialState = {
-    category: "All",
-  };
-
   const categories = Object.keys(categoriesData);
-
-  const videoReducerFunction = (videoState, action) => {
-    switch (action.type) {
-      case "CATEGORY":
-        return { ...videoState, category: action.payload };
-      default:
-        return { ...videoState };
-    }
-  };
 
   const [videoState, videoDispatch] = useReducer(
     videoReducerFunction,
@@ -48,7 +39,7 @@ const VideosProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get("api/videos");
+      const res = await axios.get("/api/videos");
       setVideos(res.data.videos);
     })();
   }, []);

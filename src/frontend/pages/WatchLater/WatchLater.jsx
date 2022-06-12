@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { PlaylistModal } from "../../components/PlaylistModal/PlaylistModal";
 import { WatchLaterOptions } from "../../components/WatchLaterOptions/WatchLaterOptions";
 import { useWatchLater } from "../../contexts/hook-export";
+import img from "../../images/image.ico";
 
 export const WatchLater = () => {
   const [showLikeOptions, setShowLikeOptions] = useState(false);
@@ -41,9 +42,11 @@ export const WatchLater = () => {
                 <div className="relative">
                   <div className="p-1">
                     <div className="flex space-between no-wrap">
-                      <h3>{title}</h3>
+                      <Link to={`/video/${_id}`} className="link">
+                        <h3>{title}</h3>
+                      </Link>
                       <span
-                        className="material-icons-outlined align-self-start"
+                        className="material-icons-outlined align-self-start options-btn"
                         onClick={() => {
                           likeOptionId === _id
                             ? setShowLikeOptions(!showLikeOptions)
@@ -54,7 +57,12 @@ export const WatchLater = () => {
                         more_vert
                       </span>
                     </div>
-                    <h5 className="pt-1">{creator}</h5>
+                    <Link to={`/video/${_id}`} className="link">
+                      <div className="flex flex-start pt-1">
+                        <img src={img} alt="avatar" className="avatar sm" />
+                        <h4>{creator}</h4>
+                      </div>
+                    </Link>
                   </div>
                   <div className="absolute video-options-position">
                     {showLikeOptions && likeOptionId === _id ? (

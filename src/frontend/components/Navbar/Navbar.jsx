@@ -13,15 +13,20 @@ export const Navbar = () => {
       <Link to="/" className="link">
         <h1 className="gradient-text">DevTube</h1>
       </Link>
-      {encodedToken ? (
-        <Link to="/profile" className="link">
-          <span className="material-icons-outlined">account_circle</span>
+      <div className="flex">
+        <Link to="/videos" className="link">
+          <h3>Videos</h3>
         </Link>
-      ) : (
-        <Link to="/login" className="link">
-          <button className="btn btn-error">Login</button>
-        </Link>
-      )}
+        {encodedToken ? (
+          <Link to="/profile" className="link">
+            <span className="material-icons-outlined">account_circle</span>
+          </Link>
+        ) : (
+          <Link to="/login" className="link">
+            <button className="btn btn-error">Login</button>
+          </Link>
+        )}
+      </div>
     </nav>
   );
 };

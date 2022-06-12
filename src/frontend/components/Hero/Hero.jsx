@@ -8,7 +8,7 @@ export const Hero = () => {
     <div className="relative">
       <img src={img} className="hero-img" alt="hero" />
       <div className="hero-text flex flex-column align-start">
-        <h1>Access and manage Dev resources in a single place</h1>
+        <h1>Access and manage web dev videos in a single place</h1>
         <Link to="/videos" className="link">
           <button className="btn btn-primary">Explore</button>
         </Link>

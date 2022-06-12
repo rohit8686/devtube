@@ -1,7 +1,10 @@
 import axios from "axios";
-import { createContext, useContext, useReducer } from "react";
-import { useVideos } from "./videos-context";
-import { useAuth } from "./auth-context";
+import { createContext, useContext, useReducer, useEffect } from "react";
+import { useVideos, useAuth } from "./hook-export";
+import {
+  initialState,
+  watchLaterReducerFunction,
+} from "../reducerFunctions/watchLaterReducerFunction";
 import { toastContainer } from "../components/Toast/Toast";
 
 const WatchLaterContext = createContext();
@@ -15,46 +18,43 @@ const WatchLaterProvider = ({ children }) => {
     authState: { encodedToken },
   } = useAuth();
 
-  const initialState = {
-    watchLaterVideos: [],
-  };
-
-  const watchLaterReducerFunction = (watchLaterState, action) => {
-    switch (action.type) {
-      case "WATCH_LATER":
-        return {
-          ...watchLaterState,
-          watchLaterVideos: action.payload,
-        };
-      default:
-        return { ...initialState };
+  useEffect(() => {
+    if (!encodedToken) {
+      watchLaterDispatch({ type: "WATCH_LATER", payload: [] });
     }
-  };
+  }, [encodedToken]);
 
   const addToWatchLaterVideos = async (_id) => {
     const watchLaterVideo = videos.find((video) => video._id === _id);
-    try {
-      const res = await axios.post(
-        "/api/user/watchlater",
-        { video: watchLaterVideo },
-        {
-          headers: { authorization: encodedToken },
+    if (encodedToken) {
+      try {
+        const res = await axios.post(
+          "/api/user/watchlater",
+          { video: watchLaterVideo },
+          {
+            headers: { authorization: encodedToken },
+          }
+        );
+        watchLaterDispatch({
+          type: "WATCH_LATER",
+          payload: res.data.watchlater,
+        });
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({
+            ...userData,
+            watchlater: res.data.watchlater,
+          })
+        );
+        toastContainer("Added to watch later", "success");
+      } catch (err) {
+        if ((err.response.status = 409)) {
+          toastContainer("Video already in watch later", "info");
         }
-      );
-      watchLaterDispatch({ type: "WATCH_LATER", payload: res.data.watchlater });
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({
-          ...userData,
-          watchlater: res.data.watchlater,
-        })
-      );
-      toastContainer("Added to watch later", "success");
-    } catch (err) {
-      if ((err.response.status = 409)) {
-        toastContainer("Video already in watch later", "info");
+        console.error(err);
       }
-      console.error(err);
+    } else {
+      toastContainer("Please login !", "error");
     }
   };
 

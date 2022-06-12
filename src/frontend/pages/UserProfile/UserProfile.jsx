@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "../../contexts/hook-export";
+import profile from "../../images/profile.jpg";
 
 export const UserProfile = () => {
   const { logout } = useAuth();
@@ -9,8 +10,13 @@ export const UserProfile = () => {
     },
   } = useAuth();
   return (
-    <div className="card card-width p-1">
-      <p>
+    <div className="card card-width p-1 text-center">
+      <img
+        src={profile}
+        alt="profile"
+        className="img img-dimensions rounded-img"
+      />
+      <p className="pt-1">
         <strong>Name : </strong>
         {firstName} {lastName}
       </p>

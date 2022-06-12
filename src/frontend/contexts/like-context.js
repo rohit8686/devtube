@@ -1,8 +1,12 @@
 import axios from "axios";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import { useVideos } from "./videos-context";
 import { useAuth } from "./auth-context";
 import { toastContainer } from "../components/Toast/Toast";
+import {
+  initialState,
+  likeReducerFunction,
+} from "../reducerFunctions/likeReducerFunction";
 
 const LikeContext = createContext();
 const useLike = () => useContext(LikeContext);
@@ -15,21 +19,11 @@ const LikeProvider = ({ children }) => {
     authState: { encodedToken },
   } = useAuth();
 
-  const initialState = {
-    likedVideos: [],
-  };
-
-  const likeReducerFunction = (likeState, action) => {
-    switch (action.type) {
-      case "LIKE":
-        return {
-          ...likeState,
-          likedVideos: action.payload,
-        };
-      default:
-        return { ...initialState };
+  useEffect(() => {
+    if (!encodedToken) {
+      likeDispatch({ type: "LIKE", payload: [] });
     }
-  };
+  }, [encodedToken]);
 
   const getLikedVideos = async () => {
     try {
@@ -50,25 +44,29 @@ const LikeProvider = ({ children }) => {
 
   const addToLikedVideos = async (_id) => {
     const likedVideo = videos.find((video) => video._id === _id);
-    try {
-      const res = await axios.post(
-        "/api/user/likes",
-        { video: likedVideo },
-        {
-          headers: { authorization: encodedToken },
-        }
-      );
-      likeDispatch({ type: "LIKE", payload: res.data.likes });
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({
-          ...userData,
-          likes: res.data.likes,
-        })
-      );
-      toastContainer("Added to Liked Videos", "success");
-    } catch (err) {
-      console.error(err);
+    if (encodedToken) {
+      try {
+        const res = await axios.post(
+          "/api/user/likes",
+          { video: likedVideo },
+          {
+            headers: { authorization: encodedToken },
+          }
+        );
+        likeDispatch({ type: "LIKE", payload: res.data.likes });
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({
+            ...userData,
+            likes: res.data.likes,
+          })
+        );
+        toastContainer("Added to Liked Videos", "success");
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      toastContainer("Please login !", "error");
     }
   };
 
@@ -77,6 +75,7 @@ const LikeProvider = ({ children }) => {
       const res = await axios.delete(`/api/user/likes/${_id}`, {
         headers: { authorization: encodedToken },
       });
+      console.log(res);
       likeDispatch({ type: "LIKE", payload: res.data.likes });
       localStorage.setItem(
         "userData",
